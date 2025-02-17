@@ -4,10 +4,16 @@ from datetime import datetime
 from mastodon import Mastodon
 
 # 現在の日付を取得
-current_date = datetime.now()
+current_date = datetime.now().date()
 
-# 1月1日から1月30日まで実行する
-if 1 <= current_date.month <= 1 and 1 <= current_date.day <= 30:
+# 休止期間の開始日と終了日を設定
+start_date = datetime(current_date.year, 12, 7).date()  # 例12月7日
+end_date = datetime(current_date.year + 1, 1, 30).date()  # 例1月30日（次の年）
+
+# 実行範囲内かどうかを確認
+if start_date <= current_date <= end_date:
+    print("Botは現在有効で、投稿を行います。")
+    
     # 環境変数の取得
     MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
     MASTODON_INSTANCE_URL = os.getenv("MASTODON_INSTANCE_URL")
@@ -22,18 +28,21 @@ if 1 <= current_date.month <= 1 and 1 <= current_date.day <= 30:
         api_base_url=MASTODON_INSTANCE_URL
     )
 
-# ランダム選択
-morning_quotes = [
-    "おはよ～。ログボ取った～？",
-    "おはよ！ ログボのお時間です",
-    ":kb_ohayo2: ログボ取ってね～",
-    ":kb_ohayo2: ログボ取って偉い",
-    ":kb_ohayo2: 今日もログボってこ！"
-]
+    # ランダム選択
+    morning_quotes = [
+        "おはよ～。ログボ取った～？",
+        "おはよ！ ログボのお時間です",
+        ":kb_ohayo2: ログボ取ってね～",
+        ":kb_ohayo2: ログボ取って偉い",
+        ":kb_ohayo2: 今日もログボってこ！"
+    ]
 
-message = random.choice(morning_quotes)
+    message = random.choice(morning_quotes)
 
-# 投稿
-status = mastodon.status_post(message)
+    # 投稿
+    status = mastodon.status_post(message)
 
-print(f"投稿成功: {status.url}")
+    print(f"投稿成功: {status.url}")
+
+else:
+    print("Botは現在休止中です。")
