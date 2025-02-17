@@ -2,7 +2,8 @@ name: Crysta_logbo_totte_bot
 
 on:
 #  schedule:
-#    - cron: "0 1 * * *"  # 日本時間 10:00（UTC 1:00）
+    # 日本時間の10:00に毎日投稿（UTC 1:00）
+#    - cron: "0 1 * 1 *"  # 1月1日～1月30日の間、毎日
 #  workflow_dispatch:  # 手動実行用
 
 jobs:
