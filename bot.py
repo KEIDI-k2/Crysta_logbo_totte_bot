@@ -14,7 +14,7 @@ from mastodon import Mastodon
 # if start_date <= current_date <= end_date:
 #     print("Botは現在ログボ取得の点呼期間です。投稿を行います。")
 
-# 環境変数の取得（上記コメントアウト時インデントを修正。上記コメントアウトを外す場合はインデントを戻してね）
+# 環境変数の取得（上記コメントアウト時インデントを修正。上記コメントアウトを外す場合はインデントを4スペース右に入れてね）
 MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
 MASTODON_INSTANCE_URL = os.getenv("MASTODON_INSTANCE_URL")
 
