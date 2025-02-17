@@ -20,7 +20,7 @@ mastodon = Mastodon(
 morning_quotes = [
     "おはよ～。ログボ取った～？",
     "おはよ！ ログボのお時間です",
-    "ログボ取ってね～",
+    ":kb_ohayo2: ログボ取ってね～",
     ":kb_ohayo2: ログボ取って偉い",
     ":kb_ohayo2: 今日もログボってこ！"
 ]
