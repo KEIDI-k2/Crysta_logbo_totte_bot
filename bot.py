@@ -12,7 +12,7 @@ end_date = datetime(current_date.year + 1, 1, 30).date()  # 例1月30日（次�
 
 # 実行範囲内かどうかを確認
 if start_date <= current_date <= end_date:
-    print("Botは現在有効で、投稿を行います。")
+    print("Botは現在ログボ取得の点呼期間です。投稿を行います。")
     
     # 環境変数の取得
     MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
