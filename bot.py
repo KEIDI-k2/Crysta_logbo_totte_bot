@@ -12,7 +12,7 @@ from mastodon import Mastodon
 
 # 実行範囲内かどうかを確認（コメントアウト）
 # if start_date <= current_date <= end_date:
-#     print("Botは現在ログボ取得の点呼期間です。投稿を行います。")
+#     print("現在ログボ期間なので投稿しま！")
 
 # 環境変数の取得（上記コメントアウト時インデントを修正。上記コメントアウトを外す場合はインデントを4スペース右に入れてね）
 MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
@@ -45,4 +45,4 @@ status = mastodon.status_post(message)
 print(f"投稿成功: {status.url}")
 
 # else:  # コメントアウト済み
-#     print("Botは現在休止中です。")
+#     print("期間外なのでお休みです")
