@@ -1,0 +1,28 @@
+name: Mastodon Bot
+
+on:
+  schedule:
+    - cron: "0 1 * * *"  # 日本時間 10:00（UTC 1:00）
+  workflow_dispatch:  # 手動実行用
+
+jobs:
+  post_status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Pythonのセットアップ
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: 依存関係のインストール
+        run: pip install Mastodon.py
+
+      - name: Mastodonに投稿
+        run: python bot.py
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ U69q6ggIQHsW15ggKcfp5TkSL3GJzHadCuDEmSbde4E }}
+          MASTODON_INSTANCE_URL: ${{ https://kmy.blue/@keidi }}
