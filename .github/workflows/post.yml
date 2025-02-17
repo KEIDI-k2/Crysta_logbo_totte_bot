@@ -1,9 +1,9 @@
 name: Crysta_logbo_totte_bot
 
 on:
-  schedule:
-    - cron: "0 1 * * *"  # 日本時間 10:00（UTC 1:00）
-  workflow_dispatch:  # 手動実行用
+#  schedule:
+#    - cron: "0 1 * * *"  # 日本時間 10:00（UTC 1:00）
+#  workflow_dispatch:  # 手動実行用
 
 jobs:
   post_status:
