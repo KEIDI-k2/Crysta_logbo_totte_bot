@@ -22,7 +22,7 @@ if 1 <= current_date.month <= 1 and 1 <= current_date.day <= 30:
         api_base_url=MASTODON_INSTANCE_URL
     )
 
-# 朝の言葉リスト（ランダムに選ばれる）
+# ランダム選択
 morning_quotes = [
     "おはよ～。ログボ取った～？",
     "おはよ！ ログボのお時間です",
@@ -31,7 +31,6 @@ morning_quotes = [
     ":kb_ohayo2: 今日もログボってこ！"
 ]
 
-# ランダムに一つの言葉を選ぶ
 message = random.choice(morning_quotes)
 
 # 投稿
