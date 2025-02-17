@@ -11,7 +11,7 @@ mastodon = Mastodon(access_token=ACCESS_TOKEN, api_base_url=INSTANCE_URL)
 
 # 投稿するメッセージ
 now = datetime.datetime.now()
-message = f"テストだよ～。 クリスタのログボの時取ってっていう奴。"
+message = f"念の為もう一回テスト。 クリスタのログボの時取ってっていう奴。"
 
 # 投稿
 mastodon.status_post(message)
