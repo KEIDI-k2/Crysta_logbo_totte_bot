@@ -1,20 +1,26 @@
 import os
 import random
+from datetime import datetime
 from mastodon import Mastodon
 
-# 環境変数の取得
-MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
-MASTODON_INSTANCE_URL = os.getenv("MASTODON_INSTANCE_URL")
+# 現在の日付を取得
+current_date = datetime.now()
 
-# アクセストークンとインスタンスURLの確認
-if not MASTODON_ACCESS_TOKEN or not MASTODON_INSTANCE_URL:
-    raise ValueError("アクセストークンまたはインスタンスURLが設定されていません！")
+# 1月1日から1月30日まで実行する
+if 1 <= current_date.month <= 1 and 1 <= current_date.day <= 30:
+    # 環境変数の取得
+    MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
+    MASTODON_INSTANCE_URL = os.getenv("MASTODON_INSTANCE_URL")
 
-# Mastodonに接続
-mastodon = Mastodon(
-    access_token=MASTODON_ACCESS_TOKEN,
-    api_base_url=MASTODON_INSTANCE_URL
-)
+    # アクセストークンとインスタンスURLの確認
+    if not MASTODON_ACCESS_TOKEN or not MASTODON_INSTANCE_URL:
+        raise ValueError("アクセストークンまたはインスタンスURLが設定されていません！")
+
+    # Mastodonに接続
+    mastodon = Mastodon(
+        access_token=MASTODON_ACCESS_TOKEN,
+        api_base_url=MASTODON_INSTANCE_URL
+    )
 
 # 朝の言葉リスト（ランダムに選ばれる）
 morning_quotes = [
