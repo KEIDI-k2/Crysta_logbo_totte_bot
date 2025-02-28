@@ -30,11 +30,11 @@ mastodon = Mastodon(
 
 # ランダム選択
 morning_quotes = [
-    "おはよ～。ログボ取った～？",
-    "おはよ！ ログボのお時間です",
-    ":kb_ohayo2: ログボ取ってね～",
-    ":kb_ohayo2: ログボ取って偉い",
-    ":kb_ohayo2: 今日もログボってこ！"
+    "おはよ～。ログボ取った～？（テストです）",
+    "おはよ！ ログボのお時間です（テストです）",
+    ":kb_ohayo2: ログボ取ってね～（テストです）",
+    ":kb_ohayo2: ログボ取って偉い（テストです）",
+    ":kb_ohayo2: 今日もログボってこ！（テストです）"
 ]
 
 message = random.choice(morning_quotes)
