@@ -12,37 +12,38 @@ end_date = datetime(current_date.year + 1, 1, 30).date()  # 例1月30日（次�
 
 # 実行範囲内かどうかを確認
 if start_date <= current_date <= end_date:
-    print("現在ログボ期間なので投稿しま！")
+    print("現在ログボ期間なので投稿します！")
 
-# 環境変数の取得（上記コメントアウト時インデントを修正。上記コメントアウトを外す場合はインデントを4スペース右に入れてね）
+    # 環境変数の取得
     MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
     MASTODON_INSTANCE_URL = os.getenv("MASTODON_INSTANCE_URL")
 
-# アクセストークンとインスタンスURLの確認
-if not MASTODON_ACCESS_TOKEN or not MASTODON_INSTANCE_URL:
-    raise ValueError("アクセストークンまたはインスタンスURLが設定されていません！")
+    # アクセストークンとインスタンスURLの確認
+    if not MASTODON_ACCESS_TOKEN or not MASTODON_INSTANCE_URL:
+        raise ValueError("アクセストークンまたはインスタンスURLが設定されていません！")
 
-# Mastodonに接続
-mastodon = Mastodon(
-    access_token=MASTODON_ACCESS_TOKEN,
-    api_base_url=MASTODON_INSTANCE_URL
-)
+    # kmyに接続
+    mastodon = Mastodon(
+        access_token=MASTODON_ACCESS_TOKEN,
+        api_base_url=MASTODON_INSTANCE_URL
+    )
 
-# ランダム選択
-morning_quotes = [
-    "おはよ～。ログボ取った～？",
-    "おはよ！ ログボのお時間です",
-    ":kb_ohayo2: ログボ取ってね～",
-    ":kb_ohayo2: ログボ取って偉い",
-    ":kb_ohayo2: 今日もログボってこ！"
-]
+    # ランダム選択
+    morning_quotes = [
+        "おはよ～。ログボ取った～？",
+        "おはよ！ ログボのお時間です",
+        ":kb_ohayo2: ログボ取ってね～",
+        ":kb_ohayo2: ログボ取って偉い",
+        ":kb_ohayo2: 今日もログボってこ！"
+    ]
 
-message = random.choice(morning_quotes)
+    message = random.choice(morning_quotes)
 
-# 投稿
-status = mastodon.status_post(message)
+    # 投稿
+    status = mastodon.status_post(message)
 
-print(f"投稿成功: {status.url}")
+    print(f"投稿成功: {status.url}")
 
 else:
     print("期間外なのでお休みです")
+
