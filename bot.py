@@ -20,7 +20,7 @@ if start_date <= current_date <= end_date:
 
     # アクセストークンとインスタンスURLの確認
     if not MASTODON_ACCESS_TOKEN or not MASTODON_INSTANCE_URL:
-        raise ValueError("アクセストークンかインスタンスURLが設定されてないっぽい")
+        raise ValueError("アクセストークンかインスタンスURLが設定されてないっぽい。稀によくある")
 
     # kmyに接続
     mastodon = Mastodon(
