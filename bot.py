@@ -12,7 +12,7 @@ end_date = datetime(current_date.year + 1, 1, 30).date()  # 例1月30日（次�
 
 # 実行範囲内かどうかを確認
 if start_date <= current_date <= end_date:
-    print("現在ログボ期間なので投稿します！")
+    print("現在ログボ期間なので投稿しま！")
 
     # 環境変数の取得
     MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
@@ -20,7 +20,7 @@ if start_date <= current_date <= end_date:
 
     # アクセストークンとインスタンスURLの確認
     if not MASTODON_ACCESS_TOKEN or not MASTODON_INSTANCE_URL:
-        raise ValueError("アクセストークンまたはインスタンスURLが設定されていません！")
+        raise ValueError("アクセストークンかインスタンスURLが設定されてないっぽい")
 
     # kmyに接続
     mastodon = Mastodon(
