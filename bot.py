@@ -7,8 +7,8 @@ from mastodon import Mastodon
 current_date = datetime.now().date()
 
 # 休止期間の開始日と終了日を設定
-start_date = datetime(current_date.year, 12, 7).date()  # 例12月7日
-end_date = datetime(current_date.year + 1, 1, 30).date()  # 例1月30日（次の年）
+start_date = datetime(current_date.year, 12, 16).date()  # 例12月7日
+end_date = datetime(current_date.year + 1, 1, 26).date()  # 例1月30日（次の年）
 
 # 実行範囲内かどうかを確認
 if start_date <= current_date <= end_date:
