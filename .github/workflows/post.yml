@@ -1,0 +1,29 @@
+name: Crysta_logbo_totte_bot
+
+on:
+  schedule:
+    # 日本時間のAM10時に投稿（UTC 1:00）
+    - cron: "0 1 * * *"  # 日付指定はbot.py。
+  workflow_dispatch:  # 手動実行用
+
+jobs:
+  post_status:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: リポジトリのチェックアウト
+        uses: actions/checkout@v4
+
+      - name: Pythonのセットアップ
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: 依存関係のインストール
+        run: pip install Mastodon.py
+
+      - name: kmyに投稿
+        run: python bot.py
+        env:
+          MASTODON_ACCESS_TOKEN: ${{ secrets.MASTODON_ACCESS_TOKEN }}
+          MASTODON_INSTANCE_URL: ${{ secrets.MASTODON_INSTANCE_URL }}
