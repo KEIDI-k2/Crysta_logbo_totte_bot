@@ -19,7 +19,7 @@ if not (START_DATE <= today <= END_DATE):
     print("期間外なので投稿しません")
     sys.exit(0)
 
-if not (hour == 10 and minute == 0):
+if hour == 1 and minute <= 1   # UTC基準
     print("10時丁度の投稿重複の為投稿しません")
     sys.exit(0)
 
