@@ -1,53 +1,48 @@
 import os
 import random
-from datetime import datetime, date, timedelta
+from datetime import datetime, date
 from mastodon import Mastodon
 import sys
+import json
 
 # ========= 設定 =========
 START_DATE = date(2025, 12, 16)
 END_DATE   = date(2026, 1, 26)
 
-# GitHub Actions は UTC
-TARGET_TIMES = {
-    "morning": (1, 0),   # 10:00 JST
-    "evening": (11, 0),  # 20:00 JST
+POST_TIMES = {
+    10: "morning",
+    20: "evening",
 }
 
-LAST_POST_FILE = "last_post.txt"
+LOG_FILE = "last_post.json"
 
-# ========= 現在時刻 =========
+# ========= 現在時刻（UTC → JST） =========
 now = datetime.utcnow()
 today = now.date()
-hour = now.hour
-minute = now.minute
-
-print(f"UTC現在時刻: {hour:02}:{minute:02}")
+hour = now.hour + 9  # JST
+if hour >= 24:
+    hour -= 24
 
 # ========= 期間チェック =========
 if not (START_DATE <= today <= END_DATE):
-    print("期間外なので投稿しません")
+    print("期間外なので投稿なし")
     sys.exit(0)
 
-# ========= 時刻判定 =========
-post_type = None
-for key, (h, m) in TARGET_TIMES.items():
-    if hour == h and minute == m:
-        post_type = key
-        break
-
-if not post_type:
-    print("投稿時刻ではありません")
+# ========= 時刻チェック =========
+if hour not in POST_TIMES:
+    print("投稿時間外")
     sys.exit(0)
+
+slot = POST_TIMES[hour]
 
 # ========= 二重投稿防止 =========
-today_key = f"{today}_{post_type}"
+key = f"{today}_{slot}"
 
-if os.path.exists(LAST_POST_FILE):
-    with open(LAST_POST_FILE, "r") as f:
-        last = f.read().strip()
-        if last == today_key:
-            print("すでに投稿済みです")
+if os.path.exists(LOG_FILE):
+    with open(LOG_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        if data.get("last_post") == key:
+            print("既に投稿済みです")
             sys.exit(0)
 
 # ========= 環境変数 =========
@@ -74,21 +69,23 @@ morning_messages = [
 
 evening_messages = [
     "こんばんは～。ログボ取りました？",
-    "夜ログボのお時間です 🌙",
+    "夜ログボのお時間です🌙",
     ":kb_otukare: ログボ取りましょ",
     ":kb_otukare: ログボ取れたね！",
     "ログボ取ってね :blobcat_ofton: "
 ]
 
-if post_type == "morning":
-    message = random.choice(morning_messages)
+if slot == "morning":
+    message = random.choice(MORNING_MESSAGES)
 else:
-    message = random.choice(evening_messages)
+    message = random.choice(EVENING_MESSAGES)
 
 # ========= 投稿 =========
 status = mastodon.status_post(message)
 print("投稿成功:", status.url)
 
-# ========= 投稿記録 =========
-with open(LAST_POST_FILE, "w") as f:
-    f.write(today_key)
+# ========= 記録 =========
+with open(LOG_FILE, "w", encoding="utf-8") as f:
+    json.dump({"last_post": key}, f, ensure_ascii=False)
+
+print("投稿記録更新完了")
