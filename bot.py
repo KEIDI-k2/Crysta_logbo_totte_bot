@@ -1,49 +1,53 @@
 import os
 import random
-from datetime import datetime
+from datetime import datetime, date
 from mastodon import Mastodon
+import sys
 
-# 現在の日付を取得
-current_date = datetime.now().date()
+# ========= 現在時刻（日本時間） =========
+now = datetime.now()
+today = now.date()
+hour = now.hour
+minute = now.minute
 
-# 休止期間の開始日と終了日を設定
-start_date = datetime(current_date.year, 12, 16).date()  # 例12月7日
-end_date = datetime(current_date.year + 1, 1, 26).date()  # 例1月30日（次の年）
+# ========= 実行期間 =========
+START_DATE = date(2025, 12, 16)
+END_DATE   = date(2026, 1, 26)
 
-# 実行範囲内かどうかを確認
-if start_date <= current_date <= end_date:
-    print("現在ログボ期間なので投稿しま！")
+# ========= 誤爆・多重投稿回避用 =========
+if not (START_DATE <= today <= END_DATE):
+    print("期間外なので投稿しません")
+    sys.exit(0)
 
-    # 環境変数の取得
-    MASTODON_ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
-    MASTODON_INSTANCE_URL = os.getenv("MASTODON_INSTANCE_URL")
+if not (hour == 10 and minute == 0):
+    print("10時丁度の投稿重複の為投稿しません")
+    sys.exit(0)
 
-    # アクセストークンとインスタンスURLの確認
-    if not MASTODON_ACCESS_TOKEN or not MASTODON_INSTANCE_URL:
-        raise ValueError("アクセストークンかインスタンスURLが設定されてないっぽい。稀によくある")
+print("条件一致：投稿します")
 
-    # kmyに接続
-    mastodon = Mastodon(
-        access_token=MASTODON_ACCESS_TOKEN,
-        api_base_url=MASTODON_INSTANCE_URL
-    )
+# ========= 環境変数 =========
+ACCESS_TOKEN = os.getenv("MASTODON_ACCESS_TOKEN")
+INSTANCE_URL = os.getenv("MASTODON_INSTANCE_URL")
 
-    # ランダム選択
-    morning_quotes = [
-        "おはよ～。ログボ取った～？",
-        "おはよ！ ログボのお時間です",
-        ":kb_ohayo2: ログボ取ってね～",
-        ":kb_ohayo2: ログボ取って偉い",
-        ":kb_ohayo2: 今日もログボってこ！"
-    ]
+if not ACCESS_TOKEN or not INSTANCE_URL:
+    raise ValueError("環境変数が設定されてないエラー")
 
-    message = random.choice(morning_quotes)
+# ========= Mastodon接続 =========
+mastodon = Mastodon(
+    access_token=ACCESS_TOKEN,
+    api_base_url=INSTANCE_URL
+)
 
-    # 投稿
-    status = mastodon.status_post(message)
+# ========= 投稿文 =========
+messages = [
+    "おはよ～。ログボ取った～？",
+    "おはよ！ ログボのお時間です",
+    ":kb_ohayo2: ログボ取ってね～",
+    ":kb_ohayo2: ログボ取って偉い",
+    ":kb_ohayo2: 今日もログボってこ！"
+]
 
-    print(f"投稿成功: {status.url}")
+message = random.choice(messages)
 
-else:
-    print("期間外なのでお休みです")
-
+status = mastodon.status_post(message)
+print("投稿成功:", status.url)
