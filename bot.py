@@ -63,18 +63,18 @@ mastodon = Mastodon(
 # ========= 投稿文 =========
 morning_messages = [
     "おはよ～。ログボ取った～？",
-    "おはよ！ ログボのお時間です",
-    ":kb_ohayo2: ログボ取ってね～",
-    ":kb_ohayo2: ログボ取って偉い",
-    ":kb_ohayo2: 今日もログボってこ！"
+    "おはよ！ ログボのお時間です。",
+    ":kb_ohayo2: ログボ取ってね～:ablobcatpnd_yurayura: ",
+    ":kb_ohayo2: ログボ取って偉い！:ablobcatcheersparkles: ",
+    ":kb_ohayo2: 今日もログボってこ！:ablobcatbongotap: "
 ]
 
 evening_messages = [
-    "こんばんは～。ログボ取りました？",
+    "こんばんは～。ログボ取りました？:blobcatpeek2: ",
     "夜ログボのお時間です🌙",
-    ":kb_otukare: ログボ取りましょ",
+    ":kb_otukare: ログボ取りましょ:blobhai: ",
     ":kb_otukare: ログボ取れたね！",
-    "ログボ取ってね :blobcat_ofton:"
+    "ログボ取って寝 :blobcat_ofton:"
 ]
 
 if slot == "morning":
