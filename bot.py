@@ -25,7 +25,7 @@ if not (START_DATE <= today <= END_DATE):
 # ========= 時間帯判定 =========
 if hour == 10 and 0 <= minute <= 20: # 10:00〜10:20
     slot = "morning"
-elif hour == 20 and 0 <= minute <= 20:　# 20:00〜20:20
+elif hour == 20 and 0 <= minute <= 20: # 20:00〜20:20
     slot = "evening"
 else:
     print("投稿時間帯外")
