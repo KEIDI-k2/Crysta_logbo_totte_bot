@@ -22,7 +22,7 @@ if not (START_DATE <= today <= END_DATE):
     print("期間外なので投稿なし")
     sys.exit(0)
 
-# ========= 時間帯判定（20分ウィンドウ） =========
+# ========= 時間帯判定 =========
 if hour == 10 and 0 <= minute <= 20: # 10:00〜10:20
     slot = "morning"
 elif hour == 20 and 0 <= minute <= 20:　# 20:00〜20:20
