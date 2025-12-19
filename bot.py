@@ -99,3 +99,13 @@ with open(LOG_FILE, "w", encoding="utf-8") as f:
     json.dump({"last_post": key}, f, ensure_ascii=False)
 
 print("投稿記録更新完了")
+
+# ========= 保険 =========
+try:
+    with open(LOG_FILE, "r", encoding="utf-8") as f:
+        data = json.load(f)
+        if data.get("last_post") == key:
+            print("既に投稿済みです")
+            sys.exit(0)
+except json.JSONDecodeError:
+    print("投稿履歴ファイル破損、再生成します")
