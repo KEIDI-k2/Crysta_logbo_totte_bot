@@ -11,8 +11,14 @@ END_DATE   = date(2026, 1, 26)
 
 # 投稿ウィンドウ（GitHub Actionsの実行揺れ対応）
 POST_WINDOWS = {
-    "morning": range(10, 11),   # 10:00〜10:59
-    "evening": range(20, 21),   # 20:00〜20:59
+    "morning": {
+        "hour": 10,
+        "minutes": range(0, 31),   # 10:00〜10:30
+    },
+    "evening": {
+        "hour": 20,
+        "minutes": range(0, 31),   # 20:00〜20:30
+    },
 }
 
 LOG_FILE = "last_post.json"
@@ -21,6 +27,7 @@ LOG_FILE = "last_post.json"
 now = datetime.utcnow() + timedelta(hours=9)
 today = now.date()
 hour = now.hour
+minute = now.minute
 
 # ========= 期間チェック =========
 if not (START_DATE <= today <= END_DATE):
@@ -29,9 +36,10 @@ if not (START_DATE <= today <= END_DATE):
 
 # ========= 時間帯判定 =========
 slot = None
-if hour in POST_WINDOWS["morning"]:
+
+if hour == 10 and 0 <= minute <= 30:
     slot = "morning"
-elif hour in POST_WINDOWS["evening"]:
+elif hour == 20 and 0 <= minute <= 30:
     slot = "evening"
 else:
     print("投稿時間帯外")
