@@ -9,7 +9,7 @@ from mastodon import Mastodon
 START_DATE = date(2025, 12, 16)
 END_DATE   = date(2026, 1, 26)
 
-# 投稿ウィンドウ（GitHub Actionsの揺れ吸収）
+# 投稿ウィンドウ（GitHub Actionsの実行揺れ対応）
 POST_WINDOWS = {
     "morning": range(10, 11),   # 10:00〜10:59
     "evening": range(20, 21),   # 20:00〜20:59
