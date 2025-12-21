@@ -4,7 +4,7 @@ on:
   workflow_dispatch:   # 外部or手動実行用。日付指定はbot.py。
   schedule:
     # 日本時間のAM10時に投稿（UTC 1:00）
-    - cron: "* * * * *"  # 保険・テスト用
+    # - cron: "* * * * *"  # 保険・テスト用
 
 jobs:
   post_status:
