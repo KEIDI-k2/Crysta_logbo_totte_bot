@@ -3,4 +3,5 @@ kmyblueでクリスタのログボ取って取ってするbotちゃんでっす�
 クリスタのログボ期間だけ適当に動かします。
 
 現在（2025/12/16-2026/1/26）稼働中。
+
 https://kmy.blue/@Crysta_logbo_totte_bot
